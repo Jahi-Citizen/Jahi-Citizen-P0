@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 
-import org.omg.CORBA.portable.InputStream;
+import java.io.InputStream;
 
 import com.revature.service.EmployeeService;
 import com.sun.net.httpserver.HttpExchange;
@@ -55,8 +58,8 @@ public class EmployeeController implements HttpHandler {
         exchange.sendResponseHeaders(200, textBuilder.toString().getBytes().length);
 
         //Don't forget to call on the service layer and execute the method
-        EmployeeService pokeService = new EmployeeService();
-        pokeService.saveToPokeBox(textBuilder.toString());
+        EmployeeService employeeService = new EmployeeService();
+        employeeService.EmployeeRegistration(textBuilder.toString());
 
         OutputStream os = exchange.getResponseBody();
         os.write(textBuilder.toString().getBytes());
