@@ -27,5 +27,10 @@ public final class App {
 
         server.setExecutor(null);
         server.start();
+
+        String pass = System.getenv("url");
+        System.out.println(pass);
+
+        
     }
 }
