@@ -29,7 +29,7 @@ public class TicketService {
          
             if (newTicket.getEmail().equals(repo.getEmail(newTicket)) && newTicket.getPassword().equals(repo.getPassword(newTicket)))
             {
-                if (newTicket.getAmount() != -25 && newTicket.getDescription() != "null")
+                if (newTicket.getAmount() != -25 && newTicket.getDescription() != "null" && newTicket.getAmount() > 0)
                 {
                     repo.Save(newTicket);
                     return "Ticket successfully created!";

@@ -41,14 +41,9 @@ public class EmployeeService {
                 value = "Registered";
                 return value;
             }
-            else if (newEmployee.getPassword().equals(repo.getPassword(newEmployee)))
-            {
-                value = "You have logged in successfully";
-                return value;
-            }
             else 
             {
-                value = "Operation FAILED";
+                value = "Operation FAILED, email is not unique";
                 return value;
             }
             
@@ -69,6 +64,47 @@ public class EmployeeService {
     }
 
 
+public String EmployeeLogin(String employee)
+    {
+        String value = "";
+        EmployeeRepository repo = new EmployeeRepository();
+        //Conversion from string to obj here?
+        ObjectMapper mapper = new ObjectMapper();
+       
+
+        try {
+            Employee newEmployee = mapper.readValue(employee, Employee.class);
+            System.out.println(newEmployee.getPassword());
+
+            if (newEmployee.getEmail().equals(repo.getEmail(newEmployee)) && newEmployee.getPassword().equals(repo.getPassword(newEmployee)) )
+            {
+                
+                value = "You have successfully logged in!";
+                return value;
+            }
+            else 
+            {
+                value = "OPERATION FAILED, Wrong email or password provided";
+                return value;
+            }
+          
+            
+
+        } catch (JsonParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "failure";
+
+
+    }
+
 
     public String verifyAndTicketHistory(String ticket)
     {
@@ -86,7 +122,7 @@ public class EmployeeService {
 
             if ((repo.getRole(newTicket)).toString().equals(Employee.Role.Standard.toString()))
             {
-                System.out.println("You are a standard employee, loser");
+                return "You are a standard employee, loser";
             }
             else if ((repo.getRole(newTicket)).toString().equals(Employee.Role.Manager.toString()))
             {
@@ -189,6 +225,11 @@ public class EmployeeService {
                 return values;
             }
             else if (jsonNode.get("status").asText().equals("Denied"))
+            {
+                values = mapper.writeValueAsString(repo.getAllEmployeeTicketsFiltered(newTicket));
+                return values;
+            }
+            else if (jsonNode.get("status").asText().equals("Pending"))
             {
                 values = mapper.writeValueAsString(repo.getAllEmployeeTicketsFiltered(newTicket));
                 return values;

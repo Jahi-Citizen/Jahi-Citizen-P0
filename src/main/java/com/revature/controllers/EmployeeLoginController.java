@@ -57,7 +57,7 @@ public class EmployeeLoginController implements HttpHandler {
             }
         } 
         EmployeeService employeeService = new EmployeeService();
-        loginValue = employeeService.EmployeeRegistration(textBuilder.toString());
+        loginValue = employeeService.EmployeeLogin(textBuilder.toString());
         exchange.sendResponseHeaders(200, loginValue.getBytes().length);
 
         //Don't forget to call on the service layer and execute the method

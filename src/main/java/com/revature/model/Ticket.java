@@ -16,7 +16,7 @@ public class Ticket {
     {
         amount = -25; 
         description = "null";
-        status = "pending";
+        status = "Pending";
     }
     public int getTicketID() {
         return ticketID;
