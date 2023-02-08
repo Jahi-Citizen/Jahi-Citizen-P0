@@ -220,7 +220,7 @@ public String EmployeeLogin(String employee)
             }
             else if (jsonNode.get("status").asText().equals("Approved"))
             {
-                newTicket.setStatus("Denied");
+                
                 values = mapper.writeValueAsString(repo.getAllEmployeeTicketsFiltered(newTicket));
                 return values;
             }
