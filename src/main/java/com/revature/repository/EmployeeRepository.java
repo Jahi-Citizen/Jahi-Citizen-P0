@@ -93,14 +93,17 @@ public class EmployeeRepository {
     public HashSet<String> getRegisteredEmployee()
     {
         HashSet<String> EmployeesRegistered = new HashSet<String>();
-        String sql = "SELECT email FROM employee";
+        String sql = "SELECT * FROM employee";
 
         try (Connection con = ConnectionUtil.getConnection()) {
             Statement state = con.createStatement();
             ResultSet FS = state.executeQuery(sql);
 
         while(FS.next()){
-            EmployeesRegistered.add(FS.getString(1));
+            // EmployeesRegistered.add(FS.getString(1));
+            EmployeesRegistered.add(FS.getString(3));
+            EmployeesRegistered.add(FS.getString(5));
+            
         }
 
     }catch (SQLException e){
@@ -110,8 +113,82 @@ public class EmployeeRepository {
     return EmployeesRegistered;
 
     }
+
+    public String getPassword(Employee employee)
+    {
+        String password = "";
+        String sql = " select pass from employee where email = ?";
         
+
+        try (Connection con = ConnectionUtil.getConnection()) {
+            PreparedStatement prstmt = con.prepareStatement(sql);
+            prstmt.setString(1, employee.getEmail());
+            ResultSet FS = prstmt.executeQuery();
+            FS.next();
+            password = FS.getString(1);
+            
+            
+    
+    }catch (SQLException e){
+        e.printStackTrace();
     }
+
+    return password;
+
+    }
+
+    public String getRole(Employee employee)
+    {
+        String role = "";
+        String sql = " select employeeRole from employee where email = ?";
+        
+
+        try (Connection con = ConnectionUtil.getConnection()) {
+            PreparedStatement prstmt = con.prepareStatement(sql);
+            prstmt.setString(1, employee.getEmail());
+            ResultSet FS = prstmt.executeQuery();
+            FS.next();
+            role = FS.getString(1);
+           
+            
+    
+    }catch (SQLException e){
+        e.printStackTrace();
+    }
+
+    return role;
+
+    }
+
+    public String getEmail(Employee employee)
+    {
+        String email = "";
+        String sql = " select email from employee where pass = ?";
+        
+
+        try (Connection con = ConnectionUtil.getConnection()) {
+            PreparedStatement prstmt = con.prepareStatement(sql);
+            prstmt.setString(1, employee.getPassword());
+            ResultSet FS = prstmt.executeQuery();
+            FS.next();
+            email = FS.getString(1);
+           
+            
+    
+    }catch (SQLException e){
+        e.printStackTrace();
+    }
+
+    return email;
+
+    }
+
+    
+}
+
+ 
+        
+    // }
 
 
             

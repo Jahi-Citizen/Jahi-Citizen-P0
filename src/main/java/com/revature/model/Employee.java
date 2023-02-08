@@ -1,15 +1,28 @@
 package com.revature.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee {
 
     //numeric employee identifier 
-    private int employeeID;
+    protected int employeeID;
 
     //fields for the employee class 
-    private String name; 
-    private String email;
-    private String userName; 
-    private String password;
+    protected String name; 
+    protected String email;
+    protected String userName; 
+    protected String password;
+    
+
+    public enum Role
+    {
+        Standard, 
+        Manager, 
+        Admin
+    }
+
+   Role employeeRole = Role.Standard; 
     
     public int getEmployeeID() {
         return employeeID;
@@ -40,6 +53,15 @@ public class Employee {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public Role getEmployeeRole() {
+        return employeeRole;
+    }
+    public void setEmployeeRole(Role employeeRole) {
+        this.employeeRole = employeeRole;
+    }
+    public Object getRole() {
+        return null;
     }
 
 

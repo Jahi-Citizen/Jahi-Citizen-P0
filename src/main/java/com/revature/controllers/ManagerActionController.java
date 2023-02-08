@@ -15,7 +15,7 @@ import com.revature.service.EmployeeService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-public class EmployeeController implements HttpHandler {
+public class ManagerActionController implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -40,7 +40,9 @@ public class EmployeeController implements HttpHandler {
 
         //We need to convert the InputStream into String
         //StringBuilder is like a mutable version of a String
+        String ticketChangeResult = "";
         StringBuilder textBuilder = new StringBuilder();
+
 
         //Converts our binary into letters
         //try_resource block will automatically close the resource within the parenthesis
@@ -54,15 +56,14 @@ public class EmployeeController implements HttpHandler {
                 textBuilder.append((char)c);
             }
         } 
-
-        exchange.sendResponseHeaders(200, textBuilder.toString().getBytes().length);
-
-        //Don't forget to call on the service layer and execute the method
         EmployeeService employeeService = new EmployeeService();
-        employeeService.EmployeeRegistration(textBuilder.toString());
+        ticketChangeResult = employeeService.ticketApprovalOrDenial(textBuilder.toString());
+        exchange.sendResponseHeaders(200, ticketChangeResult.getBytes().length);
+        
+       
 
         OutputStream os = exchange.getResponseBody();
-        os.write(textBuilder.toString().getBytes());
+        os.write(ticketChangeResult.getBytes());
         os.close();
     }
     
