@@ -1,8 +1,8 @@
 package com.revature.model;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+// import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+// @JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee {
 
     //numeric employee identifier 
@@ -14,6 +14,8 @@ public class Employee {
     protected String userName; 
     protected String password;
     
+    
+    Role employeeRole = Role.Standard; 
 
     public enum Role
     {
@@ -21,8 +23,12 @@ public class Employee {
         Manager, 
         Admin
     }
+    public Employee()
+    {
+        employeeRole = Role.Standard;
+    }
 
-   Role employeeRole = Role.Standard; 
+   
     
     public int getEmployeeID() {
         return employeeID;

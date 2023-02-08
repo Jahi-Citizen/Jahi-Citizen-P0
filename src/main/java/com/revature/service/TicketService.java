@@ -58,46 +58,46 @@ public class TicketService {
    
     }
 
-    public  void ticketApproval(String ticket)
-    {
-        TicketRepository repo = new TicketRepository();
-        // EmployeeRepository repo1 = new EmployeeRepository();
-        //Conversion from string to obj here?
-        ObjectMapper mapper = new ObjectMapper();
+    // public  void ticketApproval(String ticket)
+    // {
+    //     TicketRepository repo = new TicketRepository();
+    //     // EmployeeRepository repo1 = new EmployeeRepository();
+    //     //Conversion from string to obj here?
+    //     ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            Ticket newTicket = mapper.readValue(ticket, Ticket.class);
-            // Employee newEmployee = mapper.readValue(employee, Employee.class);
+    //     try {
+    //         Ticket newTicket = mapper.readValue(ticket, Ticket.class);
+    //         // Employee newEmployee = mapper.readValue(employee, Employee.class);
             
          
-            if (newTicket.getEmail().equals(repo.getEmail(newTicket)) && newTicket.getPassword().equals(repo.getPassword(newTicket)))
-            {
-                if (newTicket.getAmount() != -25 && newTicket.getDescription() != "null")
-                {
-                    repo.Save(newTicket);
-                    System.out.println("Ticket created!");
-                }
-                else 
-                {
-                    System.out.println("Either an amount or description was not provided");
-                }
-            }
-            else {
-                System.out.println("Ticket denied, WRONG EMAIL OR PASSWORD");
-            }
+    //         if (newTicket.getEmail().equals(repo.getEmail(newTicket)) && newTicket.getPassword().equals(repo.getPassword(newTicket)))
+    //         {
+    //             if (newTicket.getAmount() != -25 && newTicket.getDescription() != "null")
+    //             {
+    //                 repo.Save(newTicket);
+    //                 System.out.println("Ticket created!");
+    //             }
+    //             else 
+    //             {
+    //                 System.out.println("Either an amount or description was not provided");
+    //             }
+    //         }
+    //         else {
+    //             System.out.println("Ticket denied, WRONG EMAIL OR PASSWORD");
+    //         }
 
        
 
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }  catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    //     } catch (IOException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }  catch (Exception e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
    
-    }
+    // }
 
 
 
